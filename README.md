@@ -2,7 +2,10 @@ CryptMsg
 
 CryptMsg es una aplicación móvil de cifrado y descifrado de mensajes, desarrollada con React Native. La aplicación permite a los usuarios cifrar y descifrar mensajes utilizando una clave secreta. Los usuarios pueden copiar fácilmente los mensajes cifrados y descifrados en el portapapeles para compartirlos con otros.
 
-CryptMsg Screenshot
+
+![Captura de pantalla de CryptMsg](screenshot.jpg)
+
+
 Características
 
 Cifrado y descifrado de mensajes utilizando el algoritmo AES.
