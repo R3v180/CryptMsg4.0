@@ -30,6 +30,7 @@ Instala las dependencias:
         
    
 Ejecuta la aplicación en un emulador o dispositivo:
+
 Para Android:
 
     npx react-native run-android
