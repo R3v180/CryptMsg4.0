@@ -90,6 +90,7 @@ export default function App() {
           onChangeText={setKey}
           value={key}
           placeholder="Introduce la clave"
+          secureTextEntry
         />
         <Button
           title="Cifrar mensaje"
@@ -97,61 +98,41 @@ export default function App() {
           color="#2196F3"
         />
         <TextInput
-          style={styles.input}
-          onChangeText={setEncryptedMessage}
+          style={styles.inputLarge}
           value={encryptedMessage}
           placeholder="Mensaje cifrado"
-          editable={true}
+          editable={false}
+          multiline
+          textAlignVertical="top"
         />
-        <View style={styles.buttonRow}>
-          <Button
-            title="Copiar"
-            onPress={() => copyToClipboard(encryptedMessage)}
-            disabled={!encryptedMessage}
-            color="#4CAF50"
-          />
-          <Button
-            title="Descifrar mensaje"
-            onPress={() => {
-              if (key === "") {
-                Alert.alert("Error", "Por favor, ingresa una contraseña.", [
-                  {
-                    text: "OK",
-                    onPress: () => console.log("OK Pressed")
-                  }
-                ]);
-              } else if (encryptedMessage === "") {
-                Alert.alert("Error", "Por favor, cifra un mensaje primero.", [
-                  {
-                    text: "OK",
-                    onPress: () => console.log("OK Pressed")
-                  }
-                ]);
-              } else {
-                decryptMessage();
-              }
-            }}
-            color="#F44336"
-          />
-        </View>
+        <Button
+          title="Descifrar mensaje"
+          onPress={decryptMessage}
+          color="#F44336"
+        />
         <TextInput
           style={styles.inputLarge}
           value={decryptedMessage}
           placeholder="Mensaje descifrado"
           editable={false}
-          multiline={true}
-          numberOfLines={4}
+          multiline
           textAlignVertical="top"
         />
         <View style={styles.buttonRow}>
           <Button
-            title="Copiar"
+            title="Copiar cifrado"
+            onPress={() => copyToClipboard(encryptedMessage)}
+            disabled={!encryptedMessage}
+            color="#4CAF50"
+          />
+          <Button
+            title="Copiar descifrado"
             onPress={() => copyToClipboard(decryptedMessage)}
             disabled={!decryptedMessage}
             color="#4CAF50"
           />
-          <Button title="Limpiar todo" onPress={clearAll} color="#FF9800" />
         </View>
+        <Button title="Limpiar todo" onPress={clearAll} color="#FF9800" />
       </View>
     </View>
   );
