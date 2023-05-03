@@ -23,6 +23,10 @@ export default function App() {
   };
 
   const decryptMessage = () => {
+    if (!encryptedMessage) {
+      setDecryptedMessage("");
+      return;
+    }
     try {
       const bytes = CryptoJS.AES.decrypt(encryptedMessage, key);
       const plaintext = bytes.toString(CryptoJS.enc.Utf8);
@@ -41,6 +45,7 @@ export default function App() {
       );
     }
   };
+  
 
   const copyToClipboard = (text) => {
     if (text === "") {
@@ -98,26 +103,31 @@ export default function App() {
           color="#2196F3"
         />
         <TextInput
-          style={styles.inputLarge}
-          value={encryptedMessage}
-          placeholder="Mensaje cifrado"
-          editable={false}
-          multiline
-          textAlignVertical="top"
-        />
-        <Button
-          title="Descifrar mensaje"
-          onPress={decryptMessage}
-          color="#F44336"
-        />
-        <TextInput
-          style={styles.inputLarge}
-          value={decryptedMessage}
-          placeholder="Mensaje descifrado"
-          editable={false}
-          multiline
-          textAlignVertical="top"
-        />
+  style={styles.inputLarge}
+  value={encryptedMessage}
+  placeholder="Mensaje cifrado"
+  onChangeText={(text) => {
+    setEncryptedMessage(text);
+    if (!text) setDecryptedMessage("");
+  }}
+  multiline
+  textAlignVertical="top"
+/>
+<Button
+  title="Descifrar mensaje"
+  onPress={decryptMessage}
+  color="#F44336"
+  disabled={!encryptedMessage}
+/>
+<TextInput
+  style={styles.inputLarge}
+  value={decryptedMessage}
+  placeholder="Mensaje descifrado"
+  onChangeText={(text) => setDecryptedMessage(text)}
+  multiline
+  textAlignVertical="top"
+/>
+
         <View style={styles.buttonRow}>
           <Button
             title="Copiar cifrado"
